@@ -1,20 +1,4 @@
-pub enum AddrMode {
-    Acc,
-    Imp,    // Implied
-    Imm,    // Immediate
-    Zero,
-    ZeroX,
-    Abs,
-    AbsX,
-    AbsXPlus,
-    AbsY,
-    AbsYPlus,
-    Ind,
-    IndX,
-    IndY,
-    IndYPlus,
-    Rel,    // Relative
-}
+use crate::addr::AddrMode;
 
 pub struct Inst {
     mnemonic: &'static str,
@@ -23,7 +7,8 @@ pub struct Inst {
     cycles: u8,
 }
 
-pub static INSTRUCTIONS: [Inst; 151] = [
+// illegal / unofficial instructions are not complete
+pub static INSTRUCTIONS: [Inst; 0x100] = [
     Inst { mnemonic: "BRK", mode: AddrMode::Imp,        length: 1, cycles: 7 },
     Inst { mnemonic: "ORA", mode: AddrMode::IndX,       length: 2, cycles: 6 },
     Inst { mnemonic: "???", mode: AddrMode::Imp,        length: 2, cycles: 2 },
@@ -105,7 +90,7 @@ pub static INSTRUCTIONS: [Inst; 151] = [
     Inst { mnemonic: "LSR", mode: AddrMode::Acc,        length: 1, cycles: 2 },
     Inst { mnemonic: "???", mode: AddrMode::Imp,        length: 2, cycles: 2 },
     Inst { mnemonic: "JMP", mode: AddrMode::Abs,        length: 3, cycles: 3 },
-    Inst { mnemonic: "EOR", mode: AddrMode::AbsPlus,    length: 3, cycles: 4 },
+    Inst { mnemonic: "EOR", mode: AddrMode::Abs,        length: 3, cycles: 4 },
     Inst { mnemonic: "LSR", mode: AddrMode::Abs,        length: 3, cycles: 6 },
     Inst { mnemonic: "???", mode: AddrMode::Imp,        length: 2, cycles: 6 },
 
@@ -297,121 +282,121 @@ pub static INSTRUCTIONS: [Inst; 151] = [
     Inst { mnemonic: "???", mode: AddrMode::Imp,        length: 2, cycles: 7 },
 ];
 
-// http://www.6502.org/tutorials/6502opcodes.html#TYA
-pub trait CPU6502 {
+// http://www.6502.org/tutorials/6502opcodes.html
+pub trait Inst6502 {
     // bitwise AND with accumulator
-    fn adc(&self);
+    fn adc(&mut self);
 
     // arithmetic shift left
-    fn asl(&self);
+    fn asl(&mut self);
 
     // test bits
-    fn bit(&self);
+    fn bit(&mut self);
 
     // branch instructions
-    fn bpl(&self);
-    fn bmi(&self);
-    fn bvc(&self);
-    fn bvs(&self);
-    fn bcc(&self);
-    fn bcs(&self);
-    fn bne(&self);
-    fn beq(&self);
+    fn bpl(&mut self);
+    fn bmi(&mut self);
+    fn bvc(&mut self);
+    fn bvs(&mut self);
+    fn bcc(&mut self);
+    fn bcs(&mut self);
+    fn bne(&mut self);
+    fn beq(&mut self);
 
     // break
-    fn brk(&self);
+    fn brk(&mut self);
 
     // comparse accumulator
-    fn cmp(&self);
+    fn cmp(&mut self);
 
     // comparse x register
-    fn cpx(&self);
+    fn cpx(&mut self);
 
     // comparse y register
-    fn cpy(&self);
+    fn cpy(&mut self);
 
     // decrement memory
-    fn dec(&self);
+    fn dec(&mut self);
 
     // bitwise xor
-    fn eor(&self);
+    fn eor(&mut self);
 
     // flag instructions
-    fn clc(&self);
-    fn sec(&self);
-    fn cli(&self);
-    fn sei(&self);
-    fn clv(&self);
-    fn cld(&self);
-    fn sed(&self);
+    fn clc(&mut self);
+    fn sec(&mut self);
+    fn cli(&mut self);
+    fn sei(&mut self);
+    fn clv(&mut self);
+    fn cld(&mut self);
+    fn sed(&mut self);
 
     // increment memory
-    fn inc(&self);
+    fn inc(&mut self);
 
     // jump
-    fn jmp(&self);
+    fn jmp(&mut self);
 
     // jump to subroutine
-    fn jsr(&self);
+    fn jsr(&mut self);
 
     // load accumulator
-    fn lda(&self);
+    fn lda(&mut self);
 
     // load y register
-    fn ldx(&self);
+    fn ldx(&mut self);
 
     // load x register
-    fn ldy(&self);
+    fn ldy(&mut self);
 
     // logical shift right
-    fn lsr(&self);
+    fn lsr(&mut self);
 
     // no-op
-    fn nop(&self);
-    fn xxx(&self);
+    fn nop(&mut self);
+    fn xxx(&mut self);
 
     // bistwise OR with accumulator
-    fn ora(&self);
+    fn ora(&mut self);
 
     // register instructions
-    fn tax(&self);
-    fn txa(&self);
-    fn dex(&self);
-    fn inx(&self);
-    fn tay(&self);
-    fn tya(&self);
-    fn dey(&self);
-    fn iny(&self);
+    fn tax(&mut self);
+    fn txa(&mut self);
+    fn dex(&mut self);
+    fn inx(&mut self);
+    fn tay(&mut self);
+    fn tya(&mut self);
+    fn dey(&mut self);
+    fn iny(&mut self);
 
     // rotate left
-    fn rol(&self);
+    fn rol(&mut self);
 
     // rotate right
-    fn ror(&self);
+    fn ror(&mut self);
 
     // return from interrupt
-    fn rti(&self);
+    fn rti(&mut self);
 
     // return from subroutine
-    fn rts(&self);
+    fn rts(&mut self);
 
     // subtract with carry
-    fn sbc(&self);
+    fn sbc(&mut self);
 
     // store accumulator
-    fn sta(&self);
+    fn sta(&mut self);
 
     // stack instructions
-    fn txs(&self);
-    fn tsx(&self);
-    fn pha(&self);
-    fn pla(&self);
-    fn php(&self);
-    fn plp(&self);
+    fn txs(&mut self);
+    fn tsx(&mut self);
+    fn pha(&mut self);
+    fn pla(&mut self);
+    fn php(&mut self);
+    fn plp(&mut self);
 
     // store x register
-    fn stx(&self);
+    fn stx(&mut self);
 
     // store y register
-    fn sty(&self);
+    fn sty(&mut self);
 }
