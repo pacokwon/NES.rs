@@ -1,7 +1,7 @@
-use crate::addr::AddrMode;
+use crate::addr::{Addr6502, AddrMode};
 use crate::cpu::CPU;
 
-#[derive(Debug)]
+#[derive(Debug,PartialEq,Eq)]
 pub enum Mnemonic {
     XXX, ADC, AND, ASL, BCC,
     BCS, BEQ, BIT, BMI, BNE,
@@ -18,10 +18,10 @@ pub enum Mnemonic {
 }
 
 pub struct Inst {
-    mnemonic: Mnemonic,
-    mode: AddrMode,
-    length: u8,
-    cycles: u8,
+    pub mnemonic: Mnemonic,
+    pub mode: AddrMode,
+    pub length: u8,
+    pub cycles: u8,
 }
 
 // illegal / unofficial instructions are not complete
