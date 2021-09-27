@@ -1,19 +1,15 @@
 pub enum AddrMode {
-    Acc,
     Imp,    // Implied
     Imm,    // Immediate
     Zero,
     ZeroX,
     ZeroY,
     Abs,
-    AbsX,
-    AbsXPlus,
-    AbsY,
-    AbsYPlus,
+    AbsX,   // *
+    AbsY,   // *
     Ind,
     IndX,
-    IndY,
-    IndYPlus,
+    IndY,   // *
     Rel,    // Relative
 }
 
