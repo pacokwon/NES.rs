@@ -305,120 +305,120 @@ pub trait Inst6502 {
     fn execute_op(&mut self);
 
     // bitwise AND with accumulator
-    fn adc(&mut self);
+    fn adc(&mut self) -> bool;
 
     // arithmetic shift left
-    fn asl(&mut self);
+    fn asl(&mut self) -> bool;
 
     // test bits
-    fn bit(&mut self);
+    fn bit(&mut self) -> bool;
 
     // branch instructions
-    fn bpl(&mut self);
-    fn bmi(&mut self);
-    fn bvc(&mut self);
-    fn bvs(&mut self);
-    fn bcc(&mut self);
-    fn bcs(&mut self);
-    fn bne(&mut self);
-    fn beq(&mut self);
+    fn bpl(&mut self) -> bool;
+    fn bmi(&mut self) -> bool;
+    fn bvc(&mut self) -> bool;
+    fn bvs(&mut self) -> bool;
+    fn bcc(&mut self) -> bool;
+    fn bcs(&mut self) -> bool;
+    fn bne(&mut self) -> bool;
+    fn beq(&mut self) -> bool;
 
     // break
-    fn brk(&mut self);
+    fn brk(&mut self) -> bool;
 
     // comparse accumulator
-    fn cmp(&mut self);
+    fn cmp(&mut self) -> bool;
 
     // comparse x register
-    fn cpx(&mut self);
+    fn cpx(&mut self) -> bool;
 
     // comparse y register
-    fn cpy(&mut self);
+    fn cpy(&mut self) -> bool;
 
     // decrement memory
-    fn dec(&mut self);
+    fn dec(&mut self) -> bool;
 
     // bitwise xor
-    fn eor(&mut self);
+    fn eor(&mut self) -> bool;
 
     // flag instructions
-    fn clc(&mut self);
-    fn sec(&mut self);
-    fn cli(&mut self);
-    fn sei(&mut self);
-    fn clv(&mut self);
-    fn cld(&mut self);
-    fn sed(&mut self);
+    fn clc(&mut self) -> bool;
+    fn sec(&mut self) -> bool;
+    fn cli(&mut self) -> bool;
+    fn sei(&mut self) -> bool;
+    fn clv(&mut self) -> bool;
+    fn cld(&mut self) -> bool;
+    fn sed(&mut self) -> bool;
 
     // increment memory
-    fn inc(&mut self);
+    fn inc(&mut self) -> bool;
 
     // jump
-    fn jmp(&mut self);
+    fn jmp(&mut self) -> bool;
 
     // jump to subroutine
-    fn jsr(&mut self);
+    fn jsr(&mut self) -> bool;
 
     // load accumulator
-    fn lda(&mut self);
+    fn lda(&mut self) -> bool;
 
     // load y register
-    fn ldx(&mut self);
+    fn ldx(&mut self) -> bool;
 
     // load x register
-    fn ldy(&mut self);
+    fn ldy(&mut self) -> bool;
 
     // logical shift right
-    fn lsr(&mut self);
+    fn lsr(&mut self) -> bool;
 
     // no-op
-    fn nop(&mut self);
-    fn xxx(&mut self);
+    fn nop(&mut self) -> bool;
+    fn xxx(&mut self) -> bool;
 
     // bistwise OR with accumulator
-    fn ora(&mut self);
+    fn ora(&mut self) -> bool;
 
     // register instructions
-    fn tax(&mut self);
-    fn txa(&mut self);
-    fn dex(&mut self);
-    fn inx(&mut self);
-    fn tay(&mut self);
-    fn tya(&mut self);
-    fn dey(&mut self);
-    fn iny(&mut self);
+    fn tax(&mut self) -> bool;
+    fn txa(&mut self) -> bool;
+    fn dex(&mut self) -> bool;
+    fn inx(&mut self) -> bool;
+    fn tay(&mut self) -> bool;
+    fn tya(&mut self) -> bool;
+    fn dey(&mut self) -> bool;
+    fn iny(&mut self) -> bool;
 
     // rotate left
-    fn rol(&mut self);
+    fn rol(&mut self) -> bool;
 
     // rotate right
-    fn ror(&mut self);
+    fn ror(&mut self) -> bool;
 
     // return from interrupt
-    fn rti(&mut self);
+    fn rti(&mut self) -> bool;
 
     // return from subroutine
-    fn rts(&mut self);
+    fn rts(&mut self) -> bool;
 
     // subtract with carry
-    fn sbc(&mut self);
+    fn sbc(&mut self) -> bool;
 
     // store accumulator
-    fn sta(&mut self);
+    fn sta(&mut self) -> bool;
 
     // stack instructions
-    fn txs(&mut self);
-    fn tsx(&mut self);
-    fn pha(&mut self);
-    fn pla(&mut self);
-    fn php(&mut self);
-    fn plp(&mut self);
+    fn txs(&mut self) -> bool;
+    fn tsx(&mut self) -> bool;
+    fn pha(&mut self) -> bool;
+    fn pla(&mut self) -> bool;
+    fn php(&mut self) -> bool;
+    fn plp(&mut self) -> bool;
 
     // store x register
-    fn stx(&mut self);
+    fn stx(&mut self) -> bool;
 
     // store y register
-    fn sty(&mut self);
+    fn sty(&mut self) -> bool;
 }
 
 impl Inst6502 for CPU {
