@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "nesemurs"
+name = "nesrs"
 version = "0.1.0"
