@@ -164,7 +164,7 @@ impl Addr6502 for CPU {
             offset = offset | 0xFF00;
         }
 
-        self.eff_addr = self.pc.wrapping_add(offset);
+        self.jump_offset = offset;
         return false;
     }
 }
